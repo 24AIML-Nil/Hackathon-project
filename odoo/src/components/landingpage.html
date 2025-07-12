@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ReWear – Community Clothing Exchange</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --main-green: #2d7a46;
+      --light-green: #e6f4ea;
+      --white: #fff;
+      --gray: #f7fafc;
+      --shadow: 0 2px 8px #eee;
+    }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      background: var(--gray);
+      color: #222;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: var(--white);
+      box-shadow: var(--shadow);
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 26px;
+      color: var(--main-green);
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    nav a {
+      color: var(--main-green);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 16px;
+      margin-left: 22px;
+      transition: color 0.2s;
+    }
+    nav a:hover {
+      color: #226637;
+    }
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 32px 12px 0 12px;
+    }
+    .hero {
+      text-align: center;
+      margin-bottom: 38px;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      color: var(--main-green);
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    .hero p {
+      font-size: 1.15rem;
+      color: #444;
+      max-width: 540px;
+      margin: 0 auto 30px auto;
+      line-height: 1.6;
+    }
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+    .cta-buttons a {
+      background: var(--main-green);
+      color: var(--white);
+      padding: 13px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      border: none;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 6px #cce3d1;
+      outline: none;
+      cursor: pointer;
+      display: inline-block;
+    }
+    .cta-buttons a.secondary {
+      background: var(--white);
+      color: var(--main-green);
+      border: 2px solid var(--main-green);
+      box-shadow: none;
+    }
+    .cta-buttons a:hover, .cta-buttons a:focus {
+      background: #226637;
+      color: var(--white);
+      box-shadow: 0 4px 12px #b7e4c7;
+    }
+    .cta-buttons a.secondary:hover, .cta-buttons a.secondary:focus {
+      background: var(--light-green);
+      color: var(--main-green);
+    }
+    .carousel-section {
+      max-width: 430px;
+      margin: 0 auto 38px auto;
+      background: var(--white);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      padding: 22px 0 18px 0;
+      text-align: center;
+    }
+    .carousel-section h2 {
+      color: var(--main-green);
+      margin-bottom: 16px;
+      font-size: 1.3rem;
+      letter-spacing: 1px;
+    }
+    .carousel {
+      position: relative;
+    }
+    .carousel img {
+      width: 90%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 8px #cce3d1;
+    }
+    .carousel-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin: 8px 0 4px 0;
+    }
+    .carousel-desc {
+      color: #555;
+      font-size: 0.96rem;
+      margin-bottom: 10px;
+    }
+    .carousel-btns {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+    }
+    .carousel-btns button {
+      background: var(--light-green);
+      color: var(--main-green);
+      border: none;
+      border-radius: 6px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      padding: 7px 18px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      outline: none;
+    }
+    .carousel-btns button:hover, .carousel-btns button:focus {
+      background: #b7e4c7;
+      color: #226637;
+    }
+    footer {
+      background: var(--white);
+      text-align: center;
+      padding: 22px 0;
+      box-shadow: 0 -1px 4px #eee;
+      color: #888;
+      font-size: 1rem;
+      margin-top: 40px;
+    }
+    @media (max-width: 600px) {
+      header { flex-direction: column; padding: 15px 10px; }
+      .logo { margin-bottom: 10px; }
+      main { padding: 20px 2vw 0 2vw; }
+      .hero h1 { font-size: 1.7rem; }
+      .carousel-section { max-width: 99%; }
+      .carousel img { height: 150px; }
+      .cta-buttons { flex-direction: column; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <span class="logo">ReWear</span>
+    <nav>
+      <a href="#cta">Get Started</a>
+      <a href="#featured">Featured</a>
+      <span class="profile-bar">
+        <a href ="dashboard.html">
+      <img src="assets/images/avatar.png" alt="User Profile" class="profile-avatar"/>
+      </a>
+    </span>
+    </nav>
+   
+  </header>
+  <main>
+    <section class="hero">
+      <h1>Welcome to ReWear</h1>
+      <p>
+        ReWear is a community platform for exchanging unused clothing.<br>
+        Swap directly or use points to redeem new finds, and join the movement for sustainable fashion!
+      </p>
+      <div class="cta-buttons" id="cta">
+        <a href="/register">Start Swapping</a>
+        <a href="browse.html" class="secondary">Browse Items</a>
+        <a href="listanitem.html" class="secondary">List an Item</a>
+      </div>
+    </section>
+    <section class="carousel-section" id="featured">
+      <h2>Featured Items</h2>
+      <div class="carousel" aria-live="polite">
+        <img id="carousel-img" src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80" alt="Blue Denim Jacket">
+        <div class="carousel-title" id="carousel-title">Blue Denim Jacket</div>
+        <div class="carousel-desc" id="carousel-desc">Trendy denim jacket in great condition.</div>
+        <div class="carousel-btns">
+          <button onclick="prevItem()" aria-label="Previous item">&#9664;</button>
+          <button onclick="nextItem()" aria-label="Next item">&#9654;</button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    &copy; 2025 ReWear. All rights reserved.
+  </footer>
+  <script>
+    const items = [
+      {
+        title: "Blue Denim Jacket",
+        image: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80",
+        desc: "Trendy denim jacket in great condition."
+      },
+      {
+        title: "Red Summer Dress",
+        image: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=400&q=80",
+        desc: "Lightweight and perfect for summer."
+      },
+      {
+        title: "Classic White Shirt",
+        image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80",
+        desc: "A wardrobe staple, barely used."
+      }
+    ];
+    let current = 0;
+    function showItem(idx) {
+      document.getElementById('carousel-img').src = items[idx].image;
+      document.getElementById('carousel-img').alt = items[idx].title;
+      document.getElementById('carousel-title').textContent = items[idx].title;
+      document.getElementById('carousel-desc').textContent = items[idx].desc;
+    }
+    function nextItem() {
+      current = (current + 1) % items.length;
+      showItem(current);
+    }
+    function prevItem() {
+      current = (current - 1 + items.length) % items.length;
+      showItem(current);
+    }
+    // Auto-slide the carousel every 5 seconds
+    setInterval(() => {
+      nextItem();
+    }, 5000);
+    
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>List an Item – ReWear</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --main-green: #2d7a46;
+      --white: #fff;
+      --gray: #e6f4ea;
+      --shadow: 0 2px 16px #e0e8e4;
+    }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--gray);
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: var(--white);
+      box-shadow: var(--shadow);
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 26px;
+      color: var(--main-green);
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    nav a {
+      color: var(--main-green);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 16px;
+      margin-left: 22px;
+      transition: color 0.2s;
+    }
+    nav a:hover {
+      color: #226637;
+    }
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 8px;
+    }
+    .list-form-section {
+      background: var(--white);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      width: 100%;
+      max-width: 700px;
+      padding: 26px 30px 20px 30px;
+      margin: 32px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .list-form-section h1 {
+      color: var(--main-green);
+      font-size: 1.7rem;
+      margin-bottom: 12px;
+      text-align: center;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+    .list-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 24px;
+      align-items: start;
+    }
+    .list-form .full-width {
+      grid-column: 1 / -1;
+    }
+    .list-form label {
+      color: #2d7a46;
+      font-weight: 500;
+      margin-bottom: 4px;
+      font-size: 1rem;
+      display: block;
+    }
+    .list-form input[type="text"],
+    .list-form select,
+    .list-form textarea {
+      width: 100%;
+      padding: 9px 11px;
+      border: 1.5px solid #cce3d1;
+      border-radius: 7px;
+      font-size: 1rem;
+      margin-top: 2px;
+      outline: none;
+      background: #f7fafc;
+      transition: border 0.2s;
+      box-sizing: border-box;
+    }
+    .list-form textarea {
+      min-height: 48px;
+      resize: vertical;
+    }
+    .list-form input[type="file"] {
+      background: #f7fafc;
+      padding: 6px 0;
+      border: none;
+      margin-top: 2px;
+    }
+    .image-preview {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+      margin-bottom: 2px;
+    }
+    .image-preview img {
+      width: 44px;
+      height: 44px;
+      object-fit: cover;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px #cce3d1;
+      border: 1.5px solid #e6f4ea;
+    }
+    .list-form button[type="submit"] {
+      background: var(--main-green);
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      font-size: 1.07rem;
+      font-weight: bold;
+      padding: 11px 0;
+      width: 100%;
+      margin-top: 8px;
+      box-shadow: 0 2px 8px #cce3d1;
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s;
+      grid-column: 1 / -1;
+    }
+    .list-form button[type="submit"]:hover {
+      background: #226637;
+      box-shadow: 0 4px 16px #b7e4c7;
+    }
+    .note {
+      color: #888;
+      font-size: 0.93rem;
+      margin-top: 8px;
+      text-align: center;
+      grid-column: 1 / -1;
+    }
+    @media (max-width: 900px) {
+      .list-form-section { max-width: 98vw; padding: 16px 2vw; }
+    }
+    @media (max-width: 700px) {
+      .list-form { grid-template-columns: 1fr; }
+      .list-form button[type="submit"], .note { grid-column: 1 / -1; }
+    }
+    footer {
+      background: var(--white);
+      text-align: center;
+      padding: 18px 0;
+      box-shadow: 0 -1px 4px #eee;
+      color: #888;
+      font-size: 1rem;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <span class="logo">ReWear</span>
+    <nav>
+      <a href="landingpage.html">Home</a>
+      <a href="browse.html">Browse Items</a>
+       <span class="profile-bar">
+        <a href ="dashboard.html">
+      <img src="assets/images/avatar.png" alt="User Profile" class="profile-avatar"/>
+      </a>
+    </span>
+    </nav>
+  </header>
+  <main>
+    <section class="list-form-section">
+      <h1>List an Item</h1>
+      <form class="list-form" id="listItemForm">
+        <div>
+          <label for="itemTitle">Title</label>
+          <input type="text" id="itemTitle" name="itemTitle" required />
+        </div>
+        <div>
+          <label for="itemCategory">Category</label>
+          <select id="itemCategory" name="itemCategory" required>
+            <option value="">Select Category</option>
+            <option>Jackets</option>
+            <option>Dresses</option>
+            <option>Shirts</option>
+            <option>Pants</option>
+            <option>Shoes</option>
+            <option>Accessories</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div>
+          <label for="itemType">Type</label>
+          <input type="text" id="itemType" name="itemType" placeholder="e.g. Casual, Formal" required />
+        </div>
+        <div>
+          <label for="itemSize">Size</label>
+          <input type="text" id="itemSize" name="itemSize" placeholder="e.g. S, M, L, XL" required />
+        </div>
+        <div>
+          <label for="itemCondition">Condition</label>
+          <select id="itemCondition" name="itemCondition" required>
+            <option value="">Select</option>
+            <option>New</option>
+            <option>Good</option>
+            <option>Used</option>
+          </select>
+        </div>
+        <div>
+          <label for="itemTags">Tags</label>
+          <input type="text" id="itemTags" name="itemTags" placeholder="e.g. blue, winter, cotton" />
+        </div>
+        <div>
+          <label for="itemImages">Images</label>
+          <input type="file" id="itemImages" name="itemImages" multiple accept="image/*" required />
+          <div class="image-preview" id="imagePreview"></div>
+        </div>
+        <div class="full-width">
+          <label for="itemDesc">Description</label>
+          <textarea id="itemDesc" name="itemDesc" required></textarea>
+        </div>
+        <button id="submitItemBtn" class="full-width" style="margin-top:18px; background:#2d7a46; color:#fff; font-size:1.1em; border:none; border-radius:8px; padding:12px 0; cursor:pointer;">List Item</button>
+        <div class="note">All fields are required. Images can be uploaded as .jpg or .png.<br>Preview your images before submitting.</div>
+      </form>
+    </section>
+  </main>
+  <footer>
+    &copy; 2025 ReWear. All rights reserved.
+  </footer>
+  <script>
+    // Image preview
+    document.getElementById('itemImages').addEventListener('change', function(e) {
+      const preview = document.getElementById('imagePreview');
+      preview.innerHTML = '';
+      Array.from(this.files).forEach(file => {
+        if (file.type.startsWith('image/')) {
+          const reader = new FileReader();
+          reader.onload = function(evt) {
+            const img = document.createElement('img');
+            img.src = evt.target.result;
+            preview.appendChild(img);
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    });
+
+    // Form submit
+    document.getElementById('itemForm').onsubmit = function(e) {
+      e.preventDefault();
+      alert('Your item has been submitted! (Integration with backend coming soon)');
+      document.getElementById('itemForm').reset();
+      document.getElementById('imagePreview').innerHTML = '';
+    };
+  </script>
+<script>
+document.getElementById('submitItemBtn').addEventListener('click', async function(event) {
+  event.preventDefault();
+  const form = document.getElementById('listItemForm');
+  const formData = new FormData(form);
+  const itemData = {
+    title: formData.get('title'),
+    description: formData.get('description'),
+    size: formData.get('size'),
+    category: formData.get('category'),
+    image_url: formData.get('image_url')
+  };
+  if (!itemData.title || !itemData.description || !itemData.size || !itemData.category) {
+    alert('Please fill in all required fields.');
+    return;
+  }
+  await window.postItem(itemData);
+});
+</script>
+</body>
+</html>
+<script src="/public/app.js"></script>

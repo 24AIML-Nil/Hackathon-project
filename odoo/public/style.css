@@ -1,0 +1,222 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('cloth.jpeg');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.login-container {
+    background: rgba(255, 255, 255, 0.85); /* semi-transparent for readability */
+    padding: 2.5rem 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(34, 139, 34, 0.08);
+    max-width: 350px;
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    color: #388e3c;
+    margin-bottom: 0.2em;
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+}
+
+.subtitle {
+    color: #757575;
+    margin-bottom: 1.5em;
+    font-size: 1.1rem;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1em;
+}
+
+.login-form label {
+    text-align: left;
+    color: #388e3c;
+    font-weight: 500;
+    margin-bottom: 0.2em;
+}
+
+.login-form input {
+    padding: 0.7em;
+    border: 1px solid #c8e6c9;
+    border-radius: 8px;
+    font-size: 1em;
+    outline: none;
+    transition: border 0.2s;
+}
+
+.login-form input:focus {
+    border-color: #388e3c;
+}
+
+button[type="submit"] {
+    background: #388e3c;
+    color: #fff;
+    padding: 0.8em;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+button[type="submit"]:hover {
+    background: #2e7031;
+}
+
+.extra-links {
+    margin-top: 1em;
+    font-size: 0.95em;
+}
+
+.extra-links a {
+    color: #388e3c;
+    text-decoration: none;
+    transition: text-decoration 0.2s;
+}
+
+.extra-links a:hover {
+    text-decoration: underline;
+}
+header {
+  background: #e6f4ea;
+  padding: 18px 0 10px 0;
+  box-shadow: 0 2px 8px #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 32px;
+  padding-right: 32px;
+  position: absolute;
+  top: 0px;
+  flex-direction: row;
+}
+.logo {
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: #2d7a46;
+  letter-spacing: 0.03em;
+}
+nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+nav a {
+  color: #226637;
+  text-decoration: none;
+  font-weight: 500;
+  margin-right: 12px;
+  transition: color 0.2s;
+}
+nav a:hover {
+  color: #43e97b;
+}
+.profile-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.profile-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #2d7a46;
+  background: #e6f4ea;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+}
+@media (max-width: 900px) {
+  header { flex-direction: column; align-items: flex-start; padding-left: 8px; padding-right: 8px; }
+  nav { margin-top: 6px; }
+}
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-image: url('cloth.jpeg');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* Remove flex centering for the whole body */
+}
+
+header {
+  width: 100vw; /* Full width */
+  background: #e6f4ea;
+  padding: 18px 32px 10px 32px; /* uniform side padding */
+  box-shadow: 0 2px 8px #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed; /* Stays at the top */
+  top: 0;
+  left: 0;
+  z-index: 100;
+  box-sizing: border-box;
+}
+
+.logo {
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: #2d7a46;
+  letter-spacing: 0.03em;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+nav a {
+  color: #226637;
+  text-decoration: none;
+  font-weight: 500;
+  margin-right: 12px;
+  transition: color 0.2s;
+}
+
+nav a:last-child {
+  margin-right: 0;
+}
+
+nav a:hover {
+  color: #43e97b;
+}
+
+.profile-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.profile-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #2d7a46;
+  background: #e6f4ea;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+}
+
+@media (max-width: 900px) {
+  header { flex-direction: column; align-items: flex-start; padding-left: 8px; padding-right: 8px; }
+  nav { margin-top: 6px; }
+}
+

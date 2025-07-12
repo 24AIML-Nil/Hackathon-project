@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ReWear - Browse Items</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --main-green: #2d7a46;
+      --light-green: #e6f4ea;
+      --white: #fff;
+      --gray: #f7fafc;
+      --shadow: 0 2px 8px #eee;
+    }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      background: var(--gray);
+      color: #222;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: var(--white);
+      box-shadow: var(--shadow);
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 26px;
+      color: var(--main-green);
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    nav a {
+      color: var(--main-green);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 16px;
+      margin-left: 22px;
+      transition: color 0.2s;
+    }
+    nav a:hover {
+      color: #226637;
+    }
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 12px 0 12px;
+    }
+    .browse-title {
+      text-align: center;
+      color: var(--main-green);
+      font-size: 2.1rem;
+      margin-bottom: 7px;
+      font-weight: 700;
+    }
+    .browse-sub {
+      text-align: center;
+      color: #444;
+      margin-bottom: 36px;
+      font-size: 1.1rem;
+    }
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .item-card {
+      background: var(--white);
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s;
+      cursor: pointer;
+    }
+    .item-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+    .item-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .item-info {
+      padding: 15px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .item-title {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+      color: var(--main-green);
+    }
+    .item-desc {
+      font-size: 0.97rem;
+      color: #555;
+      flex-grow: 1;
+      margin-bottom: 10px;
+    }
+    .item-points {
+      font-weight: bold;
+      color: #4caf50;
+    }
+    footer {
+      background: var(--white);
+      text-align: center;
+      padding: 22px 0;
+      box-shadow: 0 -1px 4px #eee;
+      color: #888;
+      font-size: 1rem;
+      margin-top: 40px;
+    }
+    @media(max-width: 600px) {
+      header { flex-direction: column; padding: 15px 10px; }
+      .logo { margin-bottom: 10px; }
+      main { padding: 20px 2vw 0 2vw; }
+      .browse-title { font-size: 1.3rem; }
+      .items-grid { grid-template-columns: 1fr; }
+      .item-image { height: 130px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <span class="logo">ReWear</span>
+    <nav>
+      <a href="landingpage.html">Home</a>
+      <a href="browse.html">Browse</a>
+      <a href="listanitem.html">List an Item</a>
+    </nav>
+  </header>
+  <main>
+    <div class="browse-title">Browse Items</div>
+    <div class="browse-sub">Explore available clothing items in the ReWear community.</div>
+    <div class="items-grid" id="itemsGrid">
+      <!-- Items will be injected here by JS -->
+    </div>
+  </main>
+  <footer>
+    &copy; 2025 ReWear. All rights reserved.
+  </footer>
+  <script>
+    // Sample data - backend/API call se replace kar sakte hain
+    const items = [
+      {
+        id: 1,
+        title: "Blue Denim Jacket",
+        description: "Trendy denim jacket in great condition.",
+        image: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80",
+        points: 15
+      },
+      {
+        id: 2,
+        title: "Red Summer Dress",
+        description: "Lightweight and perfect for summer.",
+        image: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=400&q=80",
+        points: 20
+      },
+      {
+        id: 3,
+        title: "Classic White Shirt",
+        description: "A wardrobe staple, barely used.",
+        image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80",
+        points: 10
+      },
+      {
+        id: 4,
+        title: "Black Leather Boots",
+        description: "Comfortable and stylish boots.",
+        image: "https://images.unsplash.com/photo-1519744792095-2f2205e87b6f?auto=format&fit=crop&w=400&q=80",
+        points: 25
+      }
+    ];
+
+    const grid = document.getElementById('itemsGrid');
+
+    function renderItems() {
+      grid.innerHTML = '';
+      items.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'item-card';
+        card.onclick = function() {
+          // Navigate to itemdetails.html with query parameter
+          window.location.href = `itemdetails.html?id=${item.id}`;
+        };
+
+        card.innerHTML = `
+          <img src="${item.image}" alt="${item.title}" class="item-image" />
+          <div class="item-info">
+            <div class="item-title">${item.title}</div>
+            <div class="item-desc">${item.description}</div>
+            <div class="item-points">Points: ${item.points}</div>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+    }
+    
+    renderItems();
+
+  </script>
+</body>
+</html>

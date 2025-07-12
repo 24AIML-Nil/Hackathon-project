@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Item Detail – ReWear</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f7fafc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: #fff;
+      box-shadow: 0 2px 12px #f0f0f0;
+      padding: 16px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 24px;
+      color: #2d7a46;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    nav a {
+      color: #2d7a46;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 16px;
+      margin-left: 16px;
+      transition: color 0.2s;
+    }
+    nav a:hover {
+      color: #226637;
+    }
+    nav img {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      margin-left: 18px;
+      vertical-align: middle;
+      object-fit: cover;
+      border: 1.5px solid #e6f4ea;
+    }
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 36px 10px 0 10px;
+      min-height: 0;
+    }
+    .item-card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(45,122,70,0.10);
+      max-width: 540px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 32px 32px 28px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .item-top {
+      display: flex;
+      width: 100%;
+      gap: 24px;
+      align-items: flex-start;
+    }
+    .item-image {
+      width: 140px;
+      height: 140px;
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: 0 2px 12px #e6f4ea;
+      border: 1.5px solid #e6f4ea;
+      background: #f7fafc;
+    }
+    .item-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+    .item-title {
+      color: #2d7a46;
+      font-size: 1.45rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .item-meta {
+      color: #666;
+      font-size: 0.97rem;
+      margin-bottom: 8px;
+    }
+    .item-desc {
+      color: #333;
+      font-size: 1.01rem;
+      margin-bottom: 10px;
+    }
+    .item-tags {
+      margin-bottom: 10px;
+    }
+    .item-tag {
+      display: inline-block;
+      background: #e6f4ea;
+      color: #2d7a46;
+      font-size: 0.92rem;
+      border-radius: 6px;
+      padding: 3px 11px;
+      margin-right: 7px;
+      margin-bottom: 2px;
+      font-weight: 500;
+    }
+    .item-status {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+      gap: 10px;
+    }
+    .status-available {
+      background: #2d7a46;
+      color: #fff;
+      font-size: 0.98rem;
+      border-radius: 6px;
+      padding: 3px 14px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .item-owner {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .owner-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1.5px solid #e6f4ea;
+      box-shadow: 0 2px 8px #cce3d1;
+    }
+    .owner-name {
+      color: #2d7a46;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .owner-badges {
+      display: flex;
+      gap: 4px;
+      margin-left: 6px;
+    }
+    .owner-badge {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1.5px solid #e6f4ea;
+      background: #f7fafc;
+    }
+    .item-actions {
+      display: flex;
+      gap: 16px;
+      margin-top: 10px;
+      width: 100%;
+      justify-content: center;
+    }
+    .action-btn {
+      background: #2d7a46;
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 11px 24px;
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 8px #cce3d1;
+      letter-spacing: 0.5px;
+    }
+    .action-btn.secondary {
+      background: #fff;
+      color: #2d7a46;
+      border: 1.5px solid #2d7a46;
+    }
+    .action-btn:hover {
+      background: #226637;
+    }
+    .action-btn.secondary:hover {
+      background: #e6f4ea;
+      color: #226637;
+    }
+    footer {
+      background: #fff;
+      text-align: center;
+      padding: 18px 0;
+      box-shadow: 0 -1px 4px #eee;
+      color: #888;
+      font-size: 1rem;
+      margin-top: 30px;
+    }
+    @media (max-width: 700px) {
+      .item-card {
+        padding: 18px 6vw 16px 6vw;
+        max-width: 99vw;
+      }
+      .item-top {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+      }
+      .item-image {
+        width: 100px;
+        height: 100px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <span class="logo">ReWear</span>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="browse.html">Browse Items</a>
+      <a href="dashboard.html">
+  <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User Profile" title="User Profile" />
+</a>
+    </nav>
+  </header>
+  <main>
+    <div class="item-card">
+      <div class="item-top">
+        <img class="item-image" src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80" alt="Blue Denim Jacket" />
+        <div class="item-info">
+          <div class="item-title">Blue Denim Jacket</div>
+          <div class="item-meta">Category: Jackets &nbsp;·&nbsp; Size: M &nbsp;·&nbsp; Condition: Good</div>
+          <div class="item-desc">
+            Trendy denim jacket in great condition. Perfect for layering or as a statement piece.
+          </div>
+          <div class="item-tags">
+            <span class="item-tag">blue</span>
+            <span class="item-tag">denim</span>
+          </div>
+          <div class="item-status">
+            <span class="status-available">Available</span>
+          </div>
+          <div class="item-owner">
+            <img class="owner-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Jane Doe" />
+            <span class="owner-name">Jane Doe</span>
+            <div class="owner-badges">
+              <img class="owner-badge" src="https://randomuser.me/api/portraits/men/46.jpg" alt="Badge 1" title="Trusted" />
+              <img class="owner-badge" src="https://randomuser.me/api/portraits/women/47.jpg" alt="Badge 2" title="Top Swapper" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="item-actions">
+        <button class="action-btn">Swap Request</button>
+        <button class="action-btn secondary">Redeem via Points</button>
+      </div>
+    </div>
+  </main>
+  <footer>
+    &copy; 2025 ReWear. All rights reserved.
+  </footer>
+</body>
+</html>

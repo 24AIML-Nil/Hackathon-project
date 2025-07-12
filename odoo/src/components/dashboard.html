@@ -1,0 +1,374 @@
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <title>User Dashboard – ReWear</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <!-- Google Fonts for Modern Look -->
+          <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet">
+          <style>
+            body {
+              font-family: 'Poppins', 'Inter', Arial, sans-serif;
+              background: #f8fafc;
+              color: #222;
+              margin: 0;
+              padding: 0;
+            }
+            header {
+              background: #e6f4ea;
+              padding: 18px 0 10px 0;
+              box-shadow: 0 2px 8px #e0e0e0;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding-left: 500px;
+              padding-right: 300px;
+            }
+            .logo {
+              font-size: 1.7rem;
+              font-weight: bold;
+              color: #2d7a46;
+              letter-spacing: 0.03em;
+            }
+            nav {
+              display: flex;
+              align-items: center;
+              gap: 18px;
+            }
+            nav a {
+              color: #226637;
+              text-decoration: none;
+              font-weight: 500;
+              margin-right: 12px;
+              transition: color 0.2s;
+            }
+            nav a:hover {
+              color: #43e97b;
+            }
+            .profile-bar {
+              display: flex;
+              align-items: center;
+              gap: 12px;
+            }
+            .profile-avatar {
+              width: 42px;
+              height: 42px;
+              border-radius: 50%;
+              object-fit: cover;
+              border: 2px solid #2d7a46;
+              background: #e6f4ea;
+              box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+            }
+
+            .profile-summary {
+              background: linear-gradient(90deg, #e0f7fa 0%, #fceabb 100%);
+              border-radius: 18px;
+              box-shadow: 0 4px 20px rgba(44, 62, 80, 0.07);
+              padding: 28px 38px;
+              display: flex;
+              align-items: center;
+              gap: 22px;
+              margin: 32px 0 28px 0;
+              animation: fadeInDown 0.8s;
+            }
+            @keyframes fadeInDown {
+              from { opacity: 0; transform: translateY(-30px); }
+              to { opacity: 1; transform: translateY(0); }
+            }
+            .avatar-edit-container {
+              position: relative;
+              display: inline-block;
+            }
+            .avatar-large {
+              border-radius: 50%;
+              border: 4px solid #b2e4db;
+              box-shadow: 0 2px 12px rgba(44, 62, 80, 0.10);
+              width: 80px;
+              height: 80px;
+              object-fit: cover;
+              background: #f8fafc;
+            }
+            .edit-avatar-btn {
+              position: absolute;
+              bottom: 6px;
+              right: 6px;
+              background: #fff;
+              border-radius: 50%;
+              border: 1.5px solid #b2e4db;
+              box-shadow: 0 2px 6px rgba(44,62,80,0.10);
+              width: 32px;
+              height: 32px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              cursor: pointer;
+              transition: background 0.2s;
+              font-size: 1.2em;
+            }
+            .edit-avatar-btn:hover {
+              background: #e0f7fa;
+            }
+            .profile-info {
+              display: flex;
+              flex-direction: column;
+              gap: 6px;
+            }
+            .profile-info .name {
+              font-size: 1.4rem;
+              font-weight: bold;
+              color: #2d7a46;
+            }
+            .profile-info .email {
+              color: #888;
+              font-size: 1rem;
+            }
+            .profile-info .points {
+              background: linear-gradient(90deg, #b2e4db 60%, #e0c3fc 100%);
+              color: #333;
+              border-radius: 14px;
+              padding: 8px 18px;
+              font-weight: bold;
+              font-size: 1.13rem;
+              display: inline-flex;
+              align-items: center;
+              gap: 6px;
+              margin-top: 8px;
+            }
+
+            main {
+              max-width: 1050px;
+              margin: auto;
+              padding: 0 12px;
+            }
+            .dashboard-section {
+              margin-bottom: 48px;
+              padding: 0 8px;
+            }
+            .dashboard-section h2 {
+              color: #2d7a46;
+              font-size: 1.35rem;
+              margin-bottom: 18px;
+              letter-spacing: 0.01em;
+              font-weight: 600;
+            }
+            .item-listings, .swap-listings {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+              gap: 22px;
+            }
+            .item-card {
+              background: #fff;
+              border-radius: 16px;
+              box-shadow: 0 4px 20px rgba(44, 62, 80, 0.07);
+              padding: 20px 12px 16px 12px;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              transition: transform 0.18s, box-shadow 0.18s;
+              position: relative;
+              min-height: 290px;
+              animation: fadeInUp 0.7s;
+            }
+            @keyframes fadeInUp {
+              from { opacity: 0; transform: translateY(30px); }
+              to { opacity: 1; transform: translateY(0); }
+            }
+            .item-card:hover {
+              transform: translateY(-6px) scale(1.025);
+              box-shadow: 0 8px 32px rgba(44, 62, 80, 0.13);
+            }
+            .item-card img {
+              width: 100%;
+              max-width: 140px;
+              height: 140px;
+              object-fit: cover;
+              border-radius: 8px;
+              margin-bottom: 10px;
+              box-shadow: 0 2px 8px #f2f2f2;
+            }
+            .item-title {
+              font-weight: bold;
+              color: #2d7a46;
+              font-size: 1.09rem;
+              margin-bottom: 4px;
+              letter-spacing: 0.01em;
+            }
+            .item-meta {
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              color: #888;
+              font-size: 0.97rem;
+              margin-bottom: 8px;
+            }
+            .item-meta::before {
+              content: "🧵";
+              margin-right: 4px;
+            }
+            .item-status {
+              color: #fff;
+              background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+              border-radius: 8px;
+              font-size: 1em;
+              padding: 4px 14px;
+              margin-bottom: 6px;
+              display: inline-block;
+              font-weight: 600;
+              letter-spacing: 0.02em;
+              display: flex;
+              align-items: center;
+              gap: 6px;
+            }
+            .item-status[style*="background:#b7e4c7"] {
+              background: linear-gradient(90deg, #f7971e 0%, #ffd200 100%) !important;
+              color: #333 !important;
+            }
+            .item-status[style*="background:#b7e4c7"] span {
+              color: #333 !important;
+            }
+            footer {
+              background: #e6f4ea;
+              color: #226637;
+              text-align: center;
+              padding: 18px 0;
+              font-size: 1rem;
+              border-top: 1px solid #d0e6dd;
+              margin-top: 40px;
+            }
+            @media (max-width: 900px) {
+              main { max-width: 98vw; }
+              .profile-summary { flex-direction: column; align-items: flex-start; padding: 18px 8px; }
+              header { flex-direction: column; align-items: flex-start; padding-left: 8px; padding-right: 8px; }
+              nav { margin-top: 6px; }
+            }
+            @media (max-width: 600px) {
+              .dashboard-section { padding: 0 2px; }
+              .item-listings, .swap-listings {
+                grid-template-columns: 1fr;
+                gap: 16px;
+              }
+              .profile-summary { padding: 12px 2px; }
+            }
+          </style>
+        </head>
+        <body>
+          <header>
+            <span class="logo">ReWear</span>
+            <nav>
+              <a href="landingpage.html">Home</a>
+              <a href="browse.html">Browse Items</a>
+              <a href="listanitem.html">List an Item</a>
+              
+              <span class="profile-bar">
+                <a href="dashboard.html">
+                <img src="assets/images/avatar.png" alt="User Profile" class="profile-avatar" />
+                </a>
+              </span>
+            </nav>
+          </header>
+          <main>
+            <div class="profile-summary">
+              <div class="avatar-edit-container">
+                <img src="assets/images/avatar.png" alt="User Avatar" class="avatar-large" id="profilePic" />
+                <label for="profilePicInput" class="edit-avatar-btn" title="Edit Profile Picture">
+                  <span>✏️</span>
+                </label>
+                <input type="file" id="profilePicInput" accept="image/*" style="display:none;">
+              </div>
+              <div class="profile-info">
+                <span class="name">Jane Doe</span>
+                <span class="email">jane.doe@email.com</span>
+                <span class="points">
+                  <span style="font-size:1.2em;">⭐</span> Points: 120
+                </span>
+              </div>
+            </div>
+
+            <section class="dashboard-section">
+              <h2>My Listings</h2>
+              <div class="item-listings">
+                <div class="item-card">
+                  <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80" alt="Blue Denim Jacket">
+                  <div class="item-title">Blue Denim Jacket</div>
+                  <div class="item-meta">
+                    <span>Size: M</span> &bull; <span>Category: Jackets</span>
+                  </div>
+                  <div class="item-status">
+                    <span style="font-size:1.1em;">✔️</span> Available
+                  </div>
+                </div>
+                <div class="item-card">
+                  <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80" alt="Classic White Shirt">
+                  <div class="item-title">Classic White Shirt</div>
+                  <div class="item-meta">
+                    <span>Size: L</span> &bull; <span>Category: Shirts</span>
+                  </div>
+                  <div class="item-status" style="background:#b7e4c7; color:#226637;">
+                    <span style="font-size:1.1em;">🔄</span> Swapped
+                  </div>
+                </div>
+                <!-- Add more listing cards as needed -->
+              </div>
+            </section>
+
+            <section class="dashboard-section">
+              <h2>My Swaps</h2>
+              <div class="swap-listings">
+                <div class="item-card">
+                  <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=400&q=80" alt="Red Summer Dress">
+                  <div class="item-title">Red Summer Dress</div>
+                  <div class="item-meta">
+                    <span>Size: S</span> &bull; <span>Category: Dresses</span>
+                  </div>
+                  <div class="item-status">
+                    <span style="font-size:1.1em;">⏳</span> Ongoing
+                  </div>
+                </div>
+                <!-- Add more swap cards as needed -->
+              </div>
+            </section>
+          </main>
+          <footer>
+            &copy; 2025 ReWear. All rights reserved.
+          </footer>
+          <script>
+            document.getElementById('profilePicInput').addEventListener('change', function(event) {
+              const file = event.target.files[0];
+              if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                  document.getElementById('profilePic').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+              }
+            });
+            // When user selects a new image
+        const fileInput = document.getElementById('profilePicInput');
+        fileInput.onchange = function(e) {
+          const file = e.target.files[0];
+          const reader = new FileReader();
+          reader.onload = function(evt) {
+            const imgData = evt.target.result;
+            // Save to localStorage
+            localStorage.setItem('profilePicture', imgData);
+            // Update avatar on current page
+            document.querySelectorAll('.profile-avatar').forEach(img => {
+              img.src = imgData;
+            });
+          };
+          reader.readAsDataURL(file);
+        };
+        window.addEventListener('DOMContentLoaded', () => {
+          const imgData = localStorage.getItem('profilePicture');
+          if (imgData) {
+            document.querySelectorAll('.profile-avatar').forEach(img => {
+              img.src = imgData;
+            });
+          }
+        });
+
+          </script>
+        </body>
+        </html>
+        <script src="/public/app.js"></script>
+
