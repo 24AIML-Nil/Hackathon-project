@@ -1,13 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ReWear Sign Up</title>
     <link rel="stylesheet" href="signup.css">
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // Initialize Supabase client
+        const supabaseUrl = 'https://yysbtszewpypcaugxpbo.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5c2J0c3pld3B5cGNhdWd4cGJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIzMDIyMjQsImV4cCI6MjA2Nzg3ODIyNH0.1qEyIltmAj0FaqTsmg27NRuxW4lI-Msl0S7sdsRzMiA';
+        const sbClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+        async function signup() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match.');
+                return;
+            }
+            try {
+
+                const { data, error } = await sbClient.auth.signUp({
+                    email: email,
+                    password: password,
+                    options: {
+                        data: { name: name, points: 100 }
+                    }
+                });
+            } catch (error) {
+                console.log(error)
+            }
+
+            if (error) {
+                alert('Signup failed: ' + error.message);
+            } else {
+                alert('Signup successful! Please check your email to confirm your account.');
+                window.location.href = "index.html";
+            }
+        }
+
+        // Profile photo sync
+        window.addEventListener('DOMContentLoaded', () => {
+            const imgData = localStorage.getItem('profilePicture');
+            if (imgData) {
+                document.querySelectorAll('.profile-avatar').forEach(img => {
+                    img.src = imgData;
+                });
+            }
+            const signForm = document.querySelector('.signup-form');
+            if (signForm) {
+                signForm.addEventListener('submit', async (event) => {
+                    event.preventDefault();
+                    await signup();
+                });
+            } else {
+                console.error('Login form not found.');
+            }
+        });
+    </script>
 </head>
+
 <body>
-      <div class="signup-container">
+    <div class="signup-container">
         <h1>Sign Up</h1>
         <p class="subtitle">Join the ReWear Community</p>
         <form class="signup-form">
@@ -27,49 +88,6 @@
         </form>
         <img src="assets/images/avatar.png" alt="User Profile" class="profile-avatar" style="display:none;">
     </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>
-        const supabaseUrl = 'https://yysbtszewpypcaugxpbo.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5c2J0c3pld3B5cGNhdWd4cGJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIzMDIyMjQsImV4cCI6MjA2Nzg3ODIyNH0.1qEyIltmAj0FaqTsmg27NRuxW4lI-Msl0S7sdsRzMiA';
-        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
-
-        async function signup() {
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirm-password').value;
-            if (password !== confirmPassword) {
-                alert('Passwords do not match.');
-                return;
-            }
-            const { data, error } = await supabase.auth.signUp({
-                email: email,
-                password: password,
-                options: {
-                    data: { name: name, points: 100 }
-                }
-            });
-            if (error) {
-                alert('Signup failed: ' + error.message);
-            } else {
-                alert('Signup successful! Please check your email to confirm your account.');
-                window.location.href = "index.html";
-            }
-        }
-        document.querySelector('.signup-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            signup();
-        });
-        // Profile photo sync
-        window.addEventListener('DOMContentLoaded', () => {
-            const imgData = localStorage.getItem('profilePicture');
-            if (imgData) {
-                document.querySelectorAll('.profile-avatar').forEach(img => {
-                    img.src = imgData;
-                });
-            }
-        });
-    </script>
 </body>
+
 </html>

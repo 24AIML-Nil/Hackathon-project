@@ -3,49 +3,74 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ReWear Login</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Add this in the <head> or just before </body> -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>
-        const supabaseUrl = 'https://yysbtszewpypcaugxpbo.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5c2J0c3pld3B5cGNhdWd4cGJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIzMDIyMjQsImV4cCI6MjA2Nzg3ODIyNH0.1qEyIltmAj0FaqTsmg27NRuxW4lI-Msl0S7sdsRzMiA';
-        // Replace with your actual anon key
-        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReWear Login</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Add this in the <head> or just before </body> -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    // Initialize Supabase client
+    const supabaseUrl = 'https://yysbtszewpypcaugxpbo.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl5c2J0c3pld3B5cGNhdWd4cGJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIzMDIyMjQsImV4cCI6MjA2Nzg3ODIyNH0.1qEyIltmAj0FaqTsmg27NRuxW4lI-Msl0S7sdsRzMiA';
+    const sbClient = supabase.createClient(supabaseUrl, supabaseKey);
 
-        async function login() {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+    async function login() {
+      try {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
 
-            const { data, error } = await supabase.auth.signInWithPassword({
-                email: email,
-                password: password
-            });
-
-            if (error) {
-                alert('Login failed: ' + error.message);
-            } else {
-                window.location.href = "D:\\odoo\\src\\components\\dashboard.html"; // Redirect to dashboard on success
-            }
+        if (!email || !password) {
+          alert('Please enter both email and password.');
+          return;
         }
 
-        document.querySelector('.login-form').addEventListener('submit', function (event) {
-            event.preventDefault();
-            login();
+        console.log('Attempting login with:', email); // Avoid logging passwords for security
+
+        const { data, error } = await sbClient.auth.signInWithPassword({
+          email: email,
+          password: password
         });
-    </script>
-    <script>
-  window.addEventListener('DOMContentLoaded', () => {
-    const imgData = localStorage.getItem('profilePicture');
-    if (imgData) {
-      document.querySelectorAll('.profile-avatar').forEach(img => {
-        img.src = imgData;
-      });
+
+        if (error) {
+          console.error('Login error:', error.message);
+          alert('Login failed: ' + error.message);
+          return;
+        }
+
+        console.log('Login successful:', data);
+        // Redirect to dashboard on successful login
+        window.location.href = '/dashboard.html'; // Use relative path for web applications
+      } catch (err) {
+        console.error('Unexpected error during login:', err);
+        alert('An unexpected error occurred. Please try again later.');
+      }
     }
-  });
-</script>
+
+    // Attach event listener to form submission
+    document.addEventListener('DOMContentLoaded', () => {
+      const loginForm = document.querySelector('.login-form');
+      if (loginForm) {
+        loginForm.addEventListener('submit', async (event) => {
+          event.preventDefault();
+          await login();
+        });
+      } else {
+        console.error('Login form not found.');
+      }
+    });
+
+  </script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const imgData = localStorage.getItem('profilePicture');
+      if (imgData) {
+        document.querySelectorAll('.profile-avatar').forEach(img => {
+          img.src = imgData;
+        });
+      }
+    });
+  </script>
 
 
 </head>
@@ -66,24 +91,24 @@
 
 <body>
 
-    <div class="login-container">
-        <h1>ReWear</h1>
-        <p class="subtitle">Community Clothing Exchange</p>
-        <form class="login-form">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required autocomplete="username">
+  <div class="login-container">
+    <h1>ReWear</h1>
+    <p class="subtitle">Community Clothing Exchange</p>
+    <form class="login-form">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required autocomplete="username">
 
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required autocomplete="current-password">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required autocomplete="current-password">
 
-            <button type="submit">Login</button>
-            <div class="extra-links">
-                <a href="#">Forgot Password?</a>
-                <span> | </span>
-                <a href="signup.html">Sign Up</a>
-            </div>
-        </form>
-    </div>
+      <button type="submit">Login</button>
+      <div class="extra-links">
+        <a href="#">Forgot Password?</a>
+        <span> | </span>
+        <a href="signup.html">Sign Up</a>
+      </div>
+    </form>
+  </div>
 
 </body>
 
